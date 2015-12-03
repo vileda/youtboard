@@ -1,0 +1,7 @@
+{
+  "generator-react-webpack": {
+    "appName": "youtboard",
+    "style": "scss",
+    "postcss": true
+  }
+}
