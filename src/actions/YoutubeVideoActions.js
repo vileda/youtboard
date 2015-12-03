@@ -4,6 +4,10 @@ class YoutubeVideoActions {
   prepareAddVideo(url) {
     this.dispatch(url);
   }
+
+  addVideo(url) {
+    this.dispatch(url);
+  }
 }
 
 export default alt.createActions(YoutubeVideoActions);

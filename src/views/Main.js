@@ -1,8 +1,5 @@
 'use strict';
 
-require('normalize.css');
-require('styles/App.css');
-
 import React from 'react';
 import AddVideoFromYoutubeComponent from 'components/AddVideoFromYoutubeComponent';
 

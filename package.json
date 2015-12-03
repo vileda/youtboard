@@ -64,11 +64,13 @@
   },
   "dependencies": {
     "alt": "^0.17.9",
+    "history": "^1.13.1",
     "lodash": "^3.10.1",
     "normalize.css": "^3.0.3",
     "react": "^0.14.0",
     "react-addons-test-utils": "^0.14.0",
     "react-dom": "^0.14.0",
+    "react-router": "^1.0.0",
     "underscore": "^1.8.3"
   }
 }
