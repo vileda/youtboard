@@ -25,6 +25,7 @@ module.exports = {
       '.jsx'
     ],
     alias: {
+      helpers: srcPath + '/helpers/',
       actions: srcPath + '/actions/',
       components: srcPath + '/components/',
       views: srcPath + '/views/',

@@ -2,25 +2,30 @@
 
 import React from 'react';
 import _ from 'underscore';
+import { redirect } from 'helpers/UrlHelper';
 import history from 'components/History';
 import VideoUrlInput from 'components/VideoUrlInputComponent';
 import VideoPreview from 'components/VideoPreviewComponent';
 import YoutubeVideoStore from 'stores/YoutubeVideoStore';
 import YoutubeVideoActions from 'actions/YoutubeVideoActions';
 
-require('styles//AddVideoFromYoutube.scss');
+require('styles/AddVideoFromYoutube.scss');
 
 class AddVideoFromYoutubeComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = YoutubeVideoStore.getState();
-    this.onUrlChange = _.debounce(this.onUrlChange, 200);
+    this.onUrlChange = _.debounce(this.onUrlChange, 300);
     this.onChange = this.onChange.bind(this);
     this.addVideo = this.addVideo.bind(this);
   }
 
   componentDidMount() {
     YoutubeVideoStore.listen(this.onChange);
+  }
+
+  componentWillUnmount() {
+    YoutubeVideoStore.unlisten(this.onChange);
   }
 
   onChange(state) {
@@ -34,7 +39,7 @@ class AddVideoFromYoutubeComponent extends React.Component {
 
   addVideo(e) {
     YoutubeVideoActions.addVideo(e.target.value);
-    history.pushState(null, '/videos');
+    redirect('/videos');
   }
 
   render() {
@@ -44,7 +49,11 @@ class AddVideoFromYoutubeComponent extends React.Component {
           <VideoUrlInput onChange={this.onUrlChange} />
           { this.state.videoLoaded ? <button type="button" onClick={this.addVideo}>Add Video</button> : null }
         </form>
-        { this.state.videoLoaded ? <VideoPreview url={this.state.youtubeEmbedUrl} /> : null }
+        <ul className="ytPlayer">
+          { this.state.searchResults.items.filter((item) => !!item.id.videoId).map((item) => {
+            return (<li key={item.id.videoId}><VideoPreview url={'http://www.youtube.com/embed/'+item.id.videoId} /></li>)
+          }) }
+        </ul>
       </div>
     );
   }
